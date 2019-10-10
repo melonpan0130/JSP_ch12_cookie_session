@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>멤버 테이블에 레코드 추가</h2>
-<form action="InsertMemberProc.jsp" method="post">
+<form action="01_InsertMemberProc.jsp" method="post">
 	ID: <input type="text" name="id"><br>
 	PW: <input type="password" name="passwd"><br>
 	Name : <input type="text" name="name"><br>
