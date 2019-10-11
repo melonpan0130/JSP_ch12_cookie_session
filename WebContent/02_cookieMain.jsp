@@ -30,7 +30,7 @@
 
 <b><%= id%></b>님이 로그인 하셨습니다.
 <form method="post" action="02_cookieLogout.jsp" >
-	<input type="submit" value="submit">
+	<input type="submit" value="Log out">
 </form>
 
 </body>

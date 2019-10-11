@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 public class LogonDBBean {
 	private static LogonDBBean instance = new LogonDBBean();
@@ -14,10 +15,10 @@ public class LogonDBBean {
 	private Connection getConnection() throws Exception {
 		String url = "jdbc:mysql://localhost:3306/mirim";
 		String user = "root";
-		String pass = "1234";
+		String password = "1234";
 		
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection(url, user, pass);
+		Class.forName("com.mysql.jdbc.Driver"); // 드라이버 불러옴
+		Connection conn = DriverManager.getConnection(url, user, password);
 		return conn;
 	}
 	// LogonDBBean.getInstance();
@@ -35,6 +36,7 @@ public class LogonDBBean {
 			pstmt.setString(2, member.getPasswd());
 			pstmt.setString(3, member.getName());
 			pstmt.setTimestamp(4, member.getReg_date());
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -54,12 +56,11 @@ public class LogonDBBean {
 			String sql = "SELECT * FROM member WHERE id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery(sql);
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString("passwd").equals(passwd)) x = 1;
 				else x = 0;
 			}
-			else x = -1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
